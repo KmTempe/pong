@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <center>
+        <canvas width="480" height="320" ></canvas>
+        <script>
+        var canvas = document.querySelector("canvas");
+        var ctx = canvas.getContext("2d");
+        
+        // Δημιουργία αντικειμένου Shape
+        var spriteObject = {
+                x: 0,
+                y: 0,
+                width: 100,
+                height: 40
+             };
+
+        var shape = Object.create(spriteObject);
+        shape.x = 20;
+        shape.y = 20;
+        shape.width=10;
+        shape.height=60;
+        shape.vy=3;
+        var shape1 = Object.create(spriteObject);
+        shape1.x = 460;
+        shape1.y = 20;
+        shape1.width=10;
+        shape1.height=60;
+        shape1.vy=2;
+        var shapeBall = Object.create(spriteObject);
+        shapeBall.x = 100;
+        shapeBall.y = 50;
+        shapeBall.az=5;
+        shapeBall.vx=2;
+        shapeBall.vy=2
+        
+        var UP = 38;
+        var DOWN = 40;
+        var UP1 = 87;
+        var DOWN1 = 83;    
+        var moveUp = false;
+        var moveDown = false;
+        var moveUp1 = false;
+        var moveDown1 = false;
+        window.addEventListener("keydown", function(event) {
+            switch(event.keyCode) {
+            case UP:
+                     moveUp = true;
+                     break;
+             case DOWN:  
+                moveDown = true;
+                 break;
+             case UP1:
+                     moveUp1 = true;
+                     break;
+             case DOWN1:  
+                moveDown1 = true;
+                 break;
+        }}, false);
+        
+        window.addEventListener("keyup", function(event) {
+            switch(event.keyCode) {
+             case UP:
+                moveUp = false;
+                 break;
+             case DOWN:
+                moveDown = false;
+                break;
+             case UP1:
+                moveUp1 = false;
+                 break;
+             case DOWN1:
+                moveDown1 = false;
+                break;    
+        }}, false);
+        
+        play();
+        function play(){
+        ctx.fillStyle= "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if(moveUp && !moveDown) { shape1.vy = -12; }
+        if(moveDown && !moveUp) { shape1.vy = 12; }
+        if(!moveUp && !moveDown) { shape1.vy = 0; }
+        shape1.y=shape1.y+shape1.vy;
+        if(shape1.y+shape1.height>canvas.height){
+            shape1.y=canvas.height-shape1.height; }
+        if(shape1.y<0){ shape1.y=0; }
+        
+        if(moveUp1 && !moveDown1) { shape.vy = -12; }
+        if(moveDown1 && !moveUp1) { shape.vy = 12; }
+        if(!moveUp1 && !moveDown1) { shape.vy = 0; }
+        shape.y=shape.y+shape.vy;
+        if(shape.y+shape.height>canvas.height){
+            shape.y=canvas.height-shape.height; }
+        if(shape.y<0){ shape.y=0; }
+        // Σχεδίαση παραλληλόγραμμου,, το οποίο θα φαίνεται ότι θα κινείται λόγω της
+        //αλλαγής τιμής του shape.x
+        ctx.fillStyle= "#ffffff";
+        ctx.fillRect(shape.x,shape.y,shape.width,shape.height);
+        ctx.fillStyle= "#ffffff";
+        ctx.fillRect(shape1.x,shape1.y,shape1.width,shape1.height);
+
+        ctx.beginPath(); 
+        ctx.fillStyle= "#ffffff";
+        ctx.arc(shapeBall.x,shapeBall.y,shapeBall.az,5*Math.pi,false);
+        ctx.fill();
+        ctx.closePath();
+        setTimeout(play, 30);
+        }
+        
+        </script>
+</head>
+<body>
+    
+</body>
+</html>
