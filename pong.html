@@ -101,7 +101,7 @@
             //όσο ποιο προς τα άκρα, τόσο ακραία η γωνία επιστροφής
 			      var relatY = player.y + player.height / 2. - ball.y; //είναι η σχετική θέση που χτυπά η μπάλα τη ρακέτα
             var normalrelatY = (relatY / (player.height / 2));// είναι η κανονικοποίηση της θέσης
-            var bounce_angle = normalrelatY * (55 * Math.PI / 180); //υπολογισμός της γωνίας επιστροφής με μεγιστο 55μοίρες(με μετατροπή σε ακτίνια)
+            var bounce_angle = normalrelatY * (65 * Math.PI / 180); //υπολογισμός της γωνίας επιστροφής με μεγιστο 55μοίρες(με μετατροπή σε ακτίνια)
             ball.dx = -8 * Math.cos(bounce_angle) *player.vector ;//υπολογισμός του dx kai dy (με μέγιστη ταχυτητα το 4(διάνυσμα))
             ball.dy = 8 * (-Math.sin(bounce_angle) );
           }
