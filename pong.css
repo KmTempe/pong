@@ -12,15 +12,18 @@ body {
     height: 100%;
     z-index: -1;
     background-image: url("img/background.png");
-    animation: animateBackground 10s linear infinite;
+    animation: animateBackground 20s linear infinite;
   }
   
   @keyframes animateBackground {
     0% {
       background-position: 0% 0%;
     }
+    50%{
+        background-position: 0% 100%;
+    }
     100% {
-      background-position: 0% 100%;
+        background-position: 0% 0%;
     }
   }
   
